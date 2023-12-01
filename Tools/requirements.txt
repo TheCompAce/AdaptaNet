@@ -1,0 +1,9 @@
+markdown
+pdfkit
+fpdf
+qrcode
+opencv-python
+requests
+pillow
+markdown
+weasyprint
