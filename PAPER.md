@@ -11,8 +11,12 @@ AdaptaNet represents a breakthrough in AI transformer models, featuring dynamic 
 - **Proposed Solution**: AdaptaNet, an innovative model that addresses these challenges through dynamic input representation and enhanced self-attention mechanisms.
 
 ### 2. Literature Review
-- **Existing Models and Approaches**: Discuss the limitations of current transformer models.
-- **Relevant Previous Work**: Reference prior works that have attempted to address similar challenges.
+- **Existing Models and Approaches**: Traditional transformer models, while effective in various NLP tasks, have limitations in handling dynamically varying input sizes and efficiently processing multi-modal data. These models, primarily designed for specific tasks, often lack the flexibility to adapt to different types of inputs and the capability to integrate diverse data formats seamlessly.
+- **Relevant Previous Work**: 
+    - Vaswani et al.'s "Attention Is All You Need" introduced the fundamental transformer architecture focusing on self-attention mechanisms, forming the basis for subsequent transformer models.
+    - Devlin et al.'s "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding" expanded the scope of transformers in NLP, particularly in understanding context in language.
+    - Liu et al.'s "RoBERTa: A Robustly Optimized BERT Pretraining Approach" enhanced BERT's capabilities through optimized training approaches.
+    - "GPT-2: Language Models are Unsupervised Multitask Learners" by Radford et al. demonstrated the scalability of transformers in language generation and understanding.
 
 ### 3. Methodology
 - **VectorHouse Overview**: Describes the process of transforming various data types into vector form.
@@ -36,7 +40,10 @@ AdaptaNet represents a breakthrough in AI transformer models, featuring dynamic 
 - Summarizes the key features of AdaptaNet and its potential impact on the AI field.
 
 ### 8. References
-- (List all the sources and prior works referenced in the development of AdaptaNet.)
+1. Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... & Polosukhin, I. (2017). Attention Is All You Need. arXiv preprint arXiv:1706.03762.
+2. Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv preprint arXiv:1810.04805.
+3. Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D., ... & Stoyanov, V. (2019). RoBERTa: A Robustly Optimized BERT Pretraining Approach. arXiv preprint arXiv:1907.11692.
+4. Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., & Sutskever, I. (2019). Language Models are Unsupervised Multitask Learners. OpenAI Blog.
 
 ### Appendices
 - **Additional Information**: Details about the datasets used, computational resources, and the software tools and libraries involved.
