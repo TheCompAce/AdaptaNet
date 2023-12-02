@@ -1,6 +1,6 @@
 # Assume the previous imports and VectorHouse definition are here
 import torch
-from embeddings import EmbeddingsModel  # Update this to use the new embeddings model
+from modules.llms.llm import LLM
 from utils import ascii_to_string, int_list_to_uuid, unix_timestamp_to_datetime
 from vector import ExtendedVectorHouse, VectorHouse
 
@@ -65,7 +65,7 @@ class EmbeddingVectorHouse(VectorHouse):
 
 # Example usage
 if __name__ == "__main__":
-    embeddings_model = EmbeddingsModel()  # Initialize the embeddings model
+    embeddings_model = LLM(model_name='jinaai/jina-embeddings-v2-base-en', use_causal_pretrained=False, trust_remote_code=True) # Initialize your embeddings model here
     input_string = "hello world"
     extended_vector_instance = ExtendedVectorHouse(input_string, embeddings_model)
     

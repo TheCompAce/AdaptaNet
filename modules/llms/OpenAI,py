@@ -1,0 +1,21 @@
+import requests
+
+class OpenAI:
+    def __init__(self, api_key, api_url='https://api.openai.com/v1/chat/completions'):
+        self.api_key = api_key
+        self.api_url = api_url
+
+    def ask(self, model, system_input, user_input):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+        data = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system_input},
+                {"role": "user", "content": user_input}
+            ]
+        }
+        response = requests.post(self.api_url, json=data, headers=headers)
+        return response.json()
