@@ -72,6 +72,7 @@ class LLM:
 # Example usage
 system_input = "You are a math expert assistant. Your mission is to help users understand and solve various math problems."
 user_input = "calculate 100 + 520 + 60"
-llm = LLM(use_cache=True)
+api_key = os.getenv('OPENAI_API_KEY')  # Fetch API key from environment variable
+llm = LLM(use_cache=True, use_api=True, api_key=api_key)
 response = llm.generate_response(system_input, user_input)
 print(response)
