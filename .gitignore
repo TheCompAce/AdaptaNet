@@ -3,4 +3,4 @@ env
 installers
 AdaptaNet.zip
 Tools
-create_zip.py
+create_zip.bat
