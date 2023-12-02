@@ -25,6 +25,6 @@ if not exist env (
 call env\Scripts\activate
 pip install -r requirements.txt | find /V "already satisfied"
 
-echo Starting ShellSpeak...
+echo Starting AdaptaNet...
 
 python main.py %*
