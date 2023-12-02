@@ -1,5 +1,3 @@
-# PAPER.md
-
 ## Title: AdaptaNet - An Innovative Transformer Model for Dynamic Data Processing
 
 ### Abstract
