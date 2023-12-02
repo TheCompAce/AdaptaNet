@@ -3,6 +3,9 @@ import uuid
 from datetime import datetime
 
 import torch
+import torch.nn as nn
+
+from modules.utils import ascii_to_string, datetime_to_unix_timestamp, int_list_to_uuid, unix_timestamp_to_datetime, uuid_to_int_list
 
 class VectorHouse:
     def __init__(self, input_data: str, max_vector_length: int = None) -> None:
@@ -47,27 +50,43 @@ class VectorHouse:
         return tensor
     
     @staticmethod
-    def from_tensor(tensor):
+    def from_tensor(tensor, token_length):
         # Convert tensor back to list of vectors
         # This will depend on the structure of your original vectors
         vectors = tensor.tolist()
         # Basic reconstruction of vector elements
         reconstructed_vectors = []
         for vec in vectors:
-            data = {
-                "id": int_list_to_uuid(vec[0]),
-                "link_id": int_list_to_uuid(vec[1]),
-                "data_type": int_list_to_uuid(vec[2]),
-                "token": ascii_to_string(vec[3]),
-                "sentence_id": int_list_to_uuid(vec[4]),
-                "sentence_position": vec[5],
-                "date": unix_timestamp_to_datetime(vec[6]),
-                "nsfw_score": vec[7]
+            vector_data = {
+                "id": int_list_to_uuid(vec[0:16]),  # Adjust index as per your UUID size
+                "link_id": int_list_to_uuid(vec[16:32]),
+                "data_type": vec[32],
+                "token": ascii_to_string(vec[33:33+token_length]),  # Adjust token_length accordingly
+                "sentence_id": int_list_to_uuid(vec[33+token_length:33+token_length+16]),
+                "sentence_position": vec[49+token_length],
+                "date": unix_timestamp_to_datetime(vec[50+token_length]),
+                "nsfw_score": vec[51+token_length]
             }
+
             # Additional data can be added by overriding this method in subclasses
-            reconstructed_vectors.append(data)
+            reconstructed_vectors.append(vector_data)
         return reconstructed_vectors
 
+    def loss_function(self, output, target, alpha = 0.5, beta = 0.5):
+        # Calculate Cross-Entropy Loss
+        cross_entropy_loss = nn.CrossEntropyLoss()(output, target)
+
+        # Calculate Mean Squared Error
+        mse_loss = nn.MSELoss()(output, target)
+
+        # A* path algorithm or other decision-making logic
+        # For simplicity, let's assume a weighted sum here
+        # Adjust weights according to your preference
+        # alpha = 0.5  # weight for cross_entropy_loss
+        # beta = 0.5   # weight for mse_loss
+        combined_loss = alpha * cross_entropy_loss + beta * mse_loss
+
+        return combined_loss
 
     def get_tokens_from_data(self, input_data):
         data_type = 0
@@ -93,28 +112,6 @@ class VectorHouse:
     def __str__(self) -> str:
         return str(self.vectors)
     
-def uuid_to_int_list(uuid_value):
-    return [int(byte) for byte in uuid_value.bytes]
-
-def int_list_to_uuid(int_list):
-    try:
-        uuid_bytes = bytes(int_list)
-        return uuid.UUID(bytes=uuid_bytes)
-    except ValueError:
-        raise ValueError("Invalid integer list for UUID conversion")
-
-
-def datetime_to_unix_timestamp(date_value):
-    return int(date_value.timestamp())
-
-def unix_timestamp_to_datetime(unix_timestamp):
-    return datetime.fromtimestamp(unix_timestamp)
-
-def ascii_to_string(ascii_list):
-    return ''.join(chr(ascii_value) for ascii_value in ascii_list)
-
-def string_to_ascii(string_token: str) -> List[int]:
-    return [ord(char) for char in string_token]
 
 # Example subclass extending Vector class
 class ExtendedVectorHouse(VectorHouse):

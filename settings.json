@@ -1,0 +1,6 @@
+{
+    "embedding_prompts": {
+        "system": "prompts/embedding_system.txt",  // or directly put your prompt here
+        "user": "prompts/embedding_user.txt"     // or directly put your prompt here
+    }
+}

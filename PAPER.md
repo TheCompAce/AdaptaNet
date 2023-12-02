@@ -144,6 +144,7 @@ AdaptaNet's development marks a significant step forward in AI, paving the way f
 ### Appendices
 - **Additional Information**: Details about the datasets used, computational resources, and the software tools and libraries involved.
 - **Diagrams/Charts**: (Include any relevant diagrams or charts that illustrate the model's architecture or data processing flow.)
+- **Code/Model Sources**: jinaai/jina-embeddings-v2-base-en
 
 #### Author Information
 - **Name**: Brad Brooks
