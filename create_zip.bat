@@ -1,1 +1,0 @@
-python tools\create_zip.py -d .\ -o AdaptaNet.zip -e env,__pycache__,.vscode,.git,AdaptaNet.zip,raw,.git,test
