@@ -1,8 +1,8 @@
 # Assume the previous imports and VectorHouse definition are here
 import torch
 from modules.llms.llm import LLM
-from utils import ascii_to_string, int_list_to_uuid, unix_timestamp_to_datetime
-from vector import ExtendedVectorHouse, VectorHouse
+from modules.utils import ascii_to_string, int_list_to_uuid, unix_timestamp_to_datetime
+from modules.vector import ExtendedVectorHouse, VectorHouse
 
 class EmbeddingVectorHouse(VectorHouse):
     def __init__(self, input_data: str, embeddings_model, max_vector_length: int = None):

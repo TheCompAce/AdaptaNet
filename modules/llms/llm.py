@@ -3,10 +3,10 @@ import os
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 import torch
 
-from modules.llms.OpenAI import OpenAI
+from modules.llms.OpenAI_Api import OpenAI
 
 class LLM:
-    def __init__(self, model_name='stabilityai/StableBeluga-7B', max_length=1000, use_causal_pretrained=True, trust_remote_code=False, use_cache=True, use_api=False, api_key=None):
+    def __init__(self, model_name='GeneZC/MiniChat-3B', max_length=1000, use_causal_pretrained=True, trust_remote_code=False, use_cache=True, use_api=False, api_key=None):
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.use_cache = use_cache
         self.use_api = use_api
@@ -38,7 +38,11 @@ class LLM:
 
         if self.use_api:
             api_response = self.openai.ask(self.model, system_input, user_input)
-            return api_response['choices'][0]['message']['content']
+            response = api_response['choices'][0]['message']['content']
+            if self.use_cache:
+                self.update_cache(system_input, user_input, response)
+
+            return response
 
         # Non-API response generation
         prompt = f"### System:\n{system_input}\n### User:\n{user_input}\n### Assistant:\n"
@@ -70,9 +74,9 @@ class LLM:
             json.dump(cache, file)
 
 # Example usage
-system_input = "You are a math expert assistant. Your mission is to help users understand and solve various math problems."
-user_input = "calculate 100 + 520 + 60"
-api_key = os.getenv('OPENAI_API_KEY')  # Fetch API key from environment variable
-llm = LLM(use_cache=True, use_api=True, api_key=api_key)
-response = llm.generate_response(system_input, user_input)
-print(response)
+# system_input = "You are a math expert assistant. Your mission is to help users understand and solve various math problems."
+# user_input = "calculate 100 + 520 + 60"
+# api_key = os.getenv('OPENAI_API_KEY')  # Fetch API key from environment variable
+# llm = LLM(use_cache=True, use_api=True, api_key=api_key)
+# response = llm.generate_response(system_input, user_input)
+# print(response)

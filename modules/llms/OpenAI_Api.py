@@ -3,7 +3,7 @@ import os
 import requests
 
 class OpenAI:
-    def __init__(self, api_key, api_url='https://api.openai.com/v1/chat/completions'):
+    def __init__(self, api_key, api_url="https://api.openai.com/v1/chat/completions"):
         self.api_key = api_key
         self.api_url = api_url
 
@@ -20,6 +20,7 @@ class OpenAI:
             ]
         }
         response = requests.post(self.api_url, json=data, headers=headers)
+        print(f"response = {response}")
         return response.json()
 
     def ask_with_image(self, text_input, image, model="gpt-4-vision-preview", max_tokens=8012):

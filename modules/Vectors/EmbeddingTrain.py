@@ -2,7 +2,7 @@ import torch
 from modules.llms.llm import LLM
 from modules.AdaptaNetModel import AdaptaNetModel
 from modules.Vectors.EmbeddingVectorHouse import EmbeddingVectorHouse
-from utils import get_prompt_from_settings  # Import the utility function
+from modules.utils import get_prompt_from_settings  # Import the utility function
 
 def train_adaptanet_model(num_epochs, settings_file, input_dim, hidden_dim, output_dim, num_heads, num_layers, embeddings_model):
     model = AdaptaNetModel(input_dim, hidden_dim, output_dim, num_heads, num_layers)
